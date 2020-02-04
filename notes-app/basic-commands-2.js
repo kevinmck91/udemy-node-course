@@ -42,7 +42,7 @@ yargs2.command({
     handler: function(){
         console.log("You have used the --alter flag");
     }
-}).parse();
+}).argv;
 
 yargs2.command({
     command: 'print-even-numbers',
@@ -52,6 +52,6 @@ yargs2.command({
             if(i % 2 == 0){ console.log(i); }
         }
     }
-}).argv;
+}).parse();
 
 
