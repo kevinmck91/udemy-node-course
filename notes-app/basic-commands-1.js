@@ -81,10 +81,3 @@ console.log('Output');
 
 
 
-/******  
-    Installing a global module means it can be used from the command line
-    It doesnt need to be imported into a specific project henc the json files are not updated
-    sudo npm install nodemon@1.18.5 -g
-    nodemon - Runs automatically each time a page is saved. 
- ******/
-
