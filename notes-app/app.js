@@ -12,7 +12,12 @@ fs.appendFileSync('output.txt' , '\n\n This text was appended')
 
 
 
-// Importing another file into our app
+/******  
+    There are 3 types of require
+    1. require('fs'); - part of the node infrastructure
+    2. require('./utils'); - importing our own creation
+    3. require('validator') - after init and downloading it
+ ******/
 
 console.log("\n ** Part 1 \n");
 
@@ -39,20 +44,16 @@ console.log("\n ** Part 3 ** \n");
 const getMyNotes = require('./utils3.js');
 console.log(getMyNotes);
 
-/*  There are 3 types of require
-    1. require('fs'); - part of the node infrastructure
-    2. require('./utils'); - importing our own creation
-    3. require('validator') - after init and downloading it
- */
 
 
 
-// Importing an NPM module app
-// Firstly init npm in the root app folder (this creates the json)
-// Find a package to use on the NPM site
-// install the package in the root directory
-// If the node-modules folder is deleted, 'node install' reads the json files and recreates them
-
+/******  
+    Importing an NPM module app
+    Firstly init npm in the root app folder (this creates the json)
+    Find a package to use on the NPM site
+    install the package in the root directory
+    If the node-modules folder is deleted, 'node install' reads the json files and recreates them
+******/
 
 console.log("\n ** Part 4 ** \n");
 
@@ -62,7 +63,7 @@ console.log("isEmail:com.test@test : " + myValidator.isEmail("com.test@test"));
 console.log("isURL : " + myValidator.isURL('https://www.udemy.com/course/the-complete-nodejs-developer-course-2/learn/lecture/13728848#questions/8522936'))
 
 
-console.log("\n ** Part 4 ** \n");
+console.log("\n ** Part 5 ** \n");
 
 const myChalk = require('chalk');
 
@@ -78,4 +79,12 @@ console.log(info('Please note..'));
 console.log(success('Success'));
 console.log('Output');
 
+
+
+/******  
+    Installing a global module means it can be used from the command line
+    It doesnt need to be imported into a specific project henc the json files are not updated
+    sudo npm install nodemon@1.18.5 -g
+    nodemon - Runs automatically each time a page is saved. 
+ ******/
 
