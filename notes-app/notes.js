@@ -27,10 +27,21 @@ const addNote = function(title ,body) {
         console.log(chalk.red('Note title taken'));
     }
 
-    // Arrays are Objects, but objects can also be written in JSON format
+    // Arrays are Objects, but objects can also be written in JSON format    
+}
+
+const removeNote = function(title){
     
-    
-    
+    console.log("Removing the Note : " + title);
+
+    const notes = loadNotes();
+
+    var tempTitle = title;
+
+    delete notes.tempTitle;
+
+    saveNotes(notes);
+
 }
 
 const saveNotes = function(notes){
@@ -52,5 +63,6 @@ const loadNotes = function(){
 // Export both functions so they can be used by another file
 module.exports = {
     getNotes : getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 }
