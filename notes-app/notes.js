@@ -33,14 +33,32 @@ const addNote = function(title ,body) {
 const removeNote = function(title){
     
     console.log("Removing the Note : " + title);
-
     const notes = loadNotes();
+    var deleteIndex = findIndex(notes, title);
 
-    var tempTitle = title;
+    if(deleteIndex === -1){
+        console.log(chalk.red("No Note " + title + " found"));
+    } else {
+        // using the array.filter() method from addNote would also work
+        notes.splice(deleteIndex, 1);
+        console.log(chalk.green("Note " + title + " removed"));
+        saveNotes(notes);    
+    }
+    
+}
 
-    delete notes.tempTitle;
+const findIndex = function(array, value){
 
-    saveNotes(notes);
+    // return the index of 'value' in the array
+
+    for( var i = 0; i < array.length; i++){ 
+
+        if ( array[i].title === value) {
+          return i;
+        }
+     }
+
+     return -1;
 
 }
 

@@ -4,7 +4,7 @@ const notesUtilities = require('./notes.js')
 
 
 yargs.command({
-    command : "new",
+    command : "add",
     describe : "Create a new list",
     builder : {     // this defines the rules of the available inputs input
         title : {
