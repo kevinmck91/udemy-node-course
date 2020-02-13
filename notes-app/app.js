@@ -2,7 +2,6 @@ const chalk = require('chalk');
 const yargs = require('yargs');
 const notesUtilities = require('./notes.js')
 
-
 yargs.command({
     command : "add",
     describe : "Create a new list",
@@ -34,6 +33,24 @@ yargs.command({
 })
 
 yargs.command({
+    command : "update",
+    describe : "Update a task from the list",
+    builder : {
+        title : {
+            describe : "Title of note to be updated",
+            type : 'string',
+            demandOption : false,
+        },
+        body : {
+            describe : "body of note to be updated",
+            type : 'string',
+            demandOption : false,
+        },
+    },
+    handler (argv) { notesUtilities.updateNote(argv.title, argv.body) }
+})
+
+yargs.command({
     command : "list",
     describe : "List the title of all the notes",
     handler (){ notesUtilities.listNotes() }
@@ -52,4 +69,3 @@ yargs.command({
 })
 
 yargs.parse();
-

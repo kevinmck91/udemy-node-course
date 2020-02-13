@@ -1,33 +1,6 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const listNotes = () => {
-
-    const notes = loadNotes();
-
-    notes.forEach(element => {
-        
-        console.log(element.title);
-
-    });
-
-}
-
-const readNote = (title) => {
-    console.log(" Reading note ")
-    
-    const notes = loadNotes();
-
-    notes.forEach(element => {
-        
-       if(element.title === title){
-           console.log(element.body)
-       }
-
-    });
-
-}
-
 const addNote = (title, body) => {
 
     // Load in the existing notes, parse them, add new note, then convert bak
@@ -42,7 +15,7 @@ const addNote = (title, body) => {
             title: title,
             body: body
         });
-        saveNotes(notes)=
+        saveNotes(notes)
         console.log(chalk.green('New note added'));
     } else {
         console.log(chalk.red('Note title taken'));
@@ -83,6 +56,57 @@ const findIndex = (array, value) => {
 
 }
 
+const listNotes = () => {
+
+    const notes = loadNotes();
+
+    notes.forEach(element => {
+        
+        console.log(element.title);
+
+    });
+
+}
+
+const updateNote = function(title, body){
+    
+    const notes = loadNotes();
+    let flag = false;
+
+    notes.forEach(element => {
+        
+        if(element.title === title){
+            element.body = body;
+            saveNotes(notes)
+            flag = true;
+            console.log(chalk.green('Note \'' + title + '\' Updated'))
+        } 
+        
+    });
+
+    if(flag === false){
+        console.log(chalk.red('Title \'' + title + '\' not found'));
+    } else {
+        readNote(title)
+    }
+
+}
+
+const readNote = (title) => {
+    console.log(chalk.green("Reading note : "))
+    
+    const notes = loadNotes();
+
+    notes.forEach(element => {
+        
+       if(element.title === title){
+           console.log(element.body)
+       }
+
+    });
+
+}
+
 const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes);
     fs.writeFileSync('notes.json', dataJSON);
@@ -104,5 +128,6 @@ module.exports = {
     listNotes : listNotes,
     addNote: addNote,
     removeNote: removeNote,
-    readNote: readNote
+    readNote: readNote,
+    updateNote: updateNote
 }
