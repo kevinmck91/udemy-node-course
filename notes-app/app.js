@@ -34,9 +34,21 @@ yargs.command({
 })
 
 yargs.command({
+    command : "list",
+    describe : "List the title of all the notes",
+    handler (){ notesUtilities.listNotes() }
+})
+
+yargs.command({
     command : "read",
     describe : "Output the list to be read",
-    handler() { console.log("Displaying the list") }
+    builder : {
+        title : {
+            describe : "Note Title to be read",
+            type : 'string'
+        },
+    },
+    handler (argv) { notesUtilities.readNote(argv.title) }
 })
 
 yargs.parse();

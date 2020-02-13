@@ -1,7 +1,30 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const getNotes = (title, body) => {
+const listNotes = () => {
+
+    const notes = loadNotes();
+
+    notes.forEach(element => {
+        
+        console.log(element.title);
+
+    });
+
+}
+
+const readNote = (title) => {
+    console.log(" Reading note ")
+    
+    const notes = loadNotes();
+
+    notes.forEach(element => {
+        
+       if(element.title === title){
+           console.log(element.body)
+       }
+
+    });
 
 }
 
@@ -19,7 +42,7 @@ const addNote = (title, body) => {
             title: title,
             body: body
         });
-        saveNotes(notes);
+        saveNotes(notes)=
         console.log(chalk.green('New note added'));
     } else {
         console.log(chalk.red('Note title taken'));
@@ -78,7 +101,8 @@ const loadNotes = () => {
 
 // Export both functions so they can be used by another file
 module.exports = {
-    getNotes : getNotes,
+    listNotes : listNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    readNote: readNote
 }
