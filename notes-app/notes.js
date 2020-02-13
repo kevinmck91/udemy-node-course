@@ -1,20 +1,18 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const getNotes = function(title, body) {
+const getNotes = (title, body) => {
 
 }
 
-const addNote = function(title ,body) {
+const addNote = (title, body) => {
 
     // Load in the existing notes, parse them, add new note, then convert bak
     const notes = loadNotes();
     
     // check if the note title is used already.
     // the filter() method creates a new array with all elements that pass the test implemented
-    const duplicateNotes = notes.filter(function(note){
-        return note.title === title;
-    })
+    const duplicateNotes = notes.filter( (note) => note.title === title)
 
     if(duplicateNotes.length === 0){
         notes.push({
@@ -30,7 +28,7 @@ const addNote = function(title ,body) {
     // Arrays are Objects, but objects can also be written in JSON format    
 }
 
-const removeNote = function(title){
+const removeNote = (title) => {
     
     console.log("Removing the Note : " + title);
     const notes = loadNotes();
@@ -47,7 +45,7 @@ const removeNote = function(title){
     
 }
 
-const findIndex = function(array, value){
+const findIndex = (array, value) => {
 
     // return the index of 'value' in the array
 
@@ -62,12 +60,12 @@ const findIndex = function(array, value){
 
 }
 
-const saveNotes = function(notes){
+const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes);
     fs.writeFileSync('notes.json', dataJSON);
 }
 
-const loadNotes = function(){
+const loadNotes = () => {
     try{
         const dataBuffer = fs.readFileSync('notes.json');
         const dataJson = dataBuffer.toString();

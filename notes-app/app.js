@@ -18,9 +18,7 @@ yargs.command({
             type : 'string'
         }
     },
-    handler : function(argv){
-        notesUtilities.addNote(argv.title, argv.body); 
-    }
+    handler : (argv) => notesUtilities.addNote(argv.title, argv.body)
 })
 
 yargs.command({
@@ -32,17 +30,13 @@ yargs.command({
             type : 'string'
         },
     },
-    handler : function(argv){
-        notesUtilities.removeNote(argv.title);
-    }
+    handler (argv) { notesUtilities.removeNote(argv.title) }
 })
 
 yargs.command({
     command : "read",
     describe : "Output the list to be read",
-    handler : function(){
-        console.log("Displaying the list")
-    }
+    handler() { console.log("Displaying the list") }
 })
 
 yargs.parse();
