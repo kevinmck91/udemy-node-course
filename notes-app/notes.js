@@ -66,6 +66,9 @@ const listNotes = () => {
 
     });
 
+    if(notes == "")
+    console.log(chalk.red("No notes to display"));
+
 }
 
 const updateNote = function(title, body){
