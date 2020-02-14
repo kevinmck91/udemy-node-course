@@ -23,7 +23,7 @@ yargs.command({
 yargs.command({
     command : "remove",
     describe : "Remove a task from the list",
-    builder : {
+    builder : {     // this defines the rules of the available inputs input
         title : {
             describe : "Note Title to be Removed",
             type : 'string'
