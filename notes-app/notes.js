@@ -93,6 +93,12 @@ const updateNote = function(title, body){
 }
 
 const readNote = (title) => {
+
+    if(title === '' || title == null) {
+        console.log(chalk.red('Title can\'t be null'));
+        return;
+    }
+
     console.log(chalk.green("Reading note : "))
     
     const notes = loadNotes();
