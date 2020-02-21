@@ -3,6 +3,7 @@ const request = require('request')
 let darkSkyRequest = { url: 'https://api.darksky.net/forecast/21cd85e5ad75f5d79dbc68794b51cc71/53.2995,-6.1754?', json:true} 
 let mapBoxRequest = { url: 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1Ijoia2V2bWNrZW9uIiwiYSI6ImNrNnRiNzRkcjBuaHYzdXQ5ZWljZjQ4MWkifQ.A3HTPlh4iRQfqd6vgI0IWg', json:true} 
 
+
 // If work pc, search for proxy settings
 try {  
     darkSkyRequest.proxy = require('./proxy-settings.js');
