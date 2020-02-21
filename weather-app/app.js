@@ -2,23 +2,27 @@
 const fetchGeocode = require('./utils/geocodeFinder')
 const fetchForecast = require('./utils/weatherFinder')
 
+const location = process.argv[2];
 
-fetchGeocode('new york', (error, data) => {
+if(!location){
+    console.log("Please provide address")
+} else {  
 
-    if(error){
-        console.log(error)
-    } else {
-        console.log(data)
-    }
+    fetchGeocode(location, (error, geoData) => {
 
-    fetchForecast(data.latitude, data.longitude, (error, data) => {
+        if(error)
+            return console.log(error)
+        
 
-        if(error){
-            console.log(error);
-        } else {
-            console.log(data);
-        }
+        fetchForecast(geoData.latitude, geoData.longitude, (error, forecastData) => {
 
+            if(error)
+                return console.log(error)
+        
+            console.log(geoData.location)
+            console.log(forecastData)        
+
+        })
     })
-})
 
+}
