@@ -11,17 +11,18 @@ const forecast = (latitude, longitude, callback) => {
         //console.log("Proxy settings not required");
     }    
 
-    request( darkSkyRequest, (error, response) => {
+    // deconstruct the response object to extract the 'body' element
+    request( darkSkyRequest, (error, {body}) => {
 
         if(error) {
             callback('Error connecting to DarkSky' , undefined)
-        } else if(response.body.error) {
+        } else if(body.error) {
             callback('Connection OK : error is data returned' , undefined)
         } else {
             callback(undefined , {
-                summary : response.body.daily.data[0].summary,
-                temperature : response.body.currently.temperature,
-                precipProbability : response.body.currently.precipProbability
+                summary : body.daily.data[0].summary,
+                temperature : body.currently.temperature,
+                precipProbability : body.currently.precipProbability
             })
         }
     })

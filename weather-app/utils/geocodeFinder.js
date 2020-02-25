@@ -11,17 +11,18 @@ const geocodeFunction = (address, callback) => {
         //console.log("Proxy settings not required");
     }
 
-    request( mapBoxRequest, (error, response)  => {
+    // deconstruct the response object to extract the 'body' element
+    request( mapBoxRequest, (error, {body})  => {
         
         if(error){
             callback('Error connecting to Map Box' , undefined)
-        } else if (response.body.features.length === 0){
+        } else if (body.features.length === 0){
             callback('No data for search' , undefined)
         } else {
             callback(undefined , {
-                latitude: response.body.features[0].center[1],
-                longitude: response.body.features[0].center[0],
-                location: response.body.features[0].place_name
+                latitude: body.features[0].center[1],
+                longitude: body.features[0].center[0],
+                location: body.features[0].place_name
             })
         }
     })
