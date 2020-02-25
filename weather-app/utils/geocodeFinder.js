@@ -6,7 +6,7 @@ const geocodeFunction = (address, callback) => {
 
     // check if proxy settings are required
     try {  
-        mapBoxRequest.proxy = require('../proxy-settings.js');
+        mapBoxRequest.proxy = require('../../proxy-settings.js');
     } catch(err) {
         //console.log("Proxy settings not required");
     }

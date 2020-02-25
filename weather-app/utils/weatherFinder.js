@@ -6,7 +6,7 @@ const forecast = (latitude, longitude, callback) => {
 
     // check if proxy settings are required
     try {  
-        darkSkyRequest.proxy = require('../proxy-settings.js');
+        darkSkyRequest.proxy = require('../../proxy-settings.js');
     } catch(err) {
         //console.log("Proxy settings not required");
     }    
