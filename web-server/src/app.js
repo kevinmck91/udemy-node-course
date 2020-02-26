@@ -5,36 +5,40 @@ const express = require('express')
 // Doenst take arguments. Configured by functions
 const app = express();
 
-console.log(path.join(__dirname, '../public/index.html'))
+// Define paths for Express Config
+const publicDirectoryPath = path.join(__dirname, '../public')
+const viewsPath = path.join(__dirname, '../templates')
 
-// Configures what the server does when someone tries to get the resource at the url (HTML or JSON)
-// It takes in the partial URL (route) or and the callback function : 
+// Setup handlebars engine and views location
+app.set('view engine', 'hbs')
+app.set('views', viewsPath)
+
+// Setup static directiory to serve
+app.use(express.static(publicDirectoryPath))
+app.use(express.static(viewsPath))
+
+
 app.get('', (req, res) => {
-    res.send('<h1>Home Page</h1>')     // allows us to send something back to the requester (a browser)
-})
-
-app.get('/weather', (req, res) => {
-    res.send({
-        Weather: "Snow",
-        Temperature :3
+    res.render('index', {
+        title:'Weather App',
+        name: 'Kevin Mckeon'
     })
 })
 
-app.get('/help', (req, res) => {    //Automaticlally stringafied by express
-    res.send([
-        {
-            name: "Kevin",
-            age :20
-        },
-        {
-            name: "Alice",
-            age :20
-        }
-    ]) 
-})
 
 app.get('/about', (req, res) => {
-    res.send('<h1>About Page</h1>')
+    res.render('about', {
+        title:'About Page',
+        name: 'Kevin Mckeon',
+
+    })
+})
+
+app.get('/help', (req, res) => {
+    res.render('help', {
+        title:'Help Page',
+        name: 'Kevin Mckeon'
+    })
 })
 
 app.listen(3000, () => {
