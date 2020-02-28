@@ -9,9 +9,24 @@
     </head>
     <body>       
         <div class = "main-content">
+            
             {{>header}}
+            
+            <div class = "sub-content">
+                {{data.location}}
+                <br>
+               {{data.summary}}
+                <br>
+               {{data.temperature}}
+               <br>
+               {{data.precipProbability}}
+            
+            </div>
+
         </div>
+        
         {{>footer}}
+
     </body>
 
 </html>

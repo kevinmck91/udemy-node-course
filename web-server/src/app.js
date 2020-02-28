@@ -1,7 +1,8 @@
 const path = require('path')        // core module
 const express = require('express')
 const hbs = require('hbs')
-
+const geocode = require('./utils/geocodeFinder')
+const weather = require('./utils/weatherFinder')
 
 // Doenst take arguments. Configured by functions
 const app = express();
@@ -26,9 +27,38 @@ app.use(express.static(viewsPath))
 
 
 app.get('', (req, res) => {
-    res.render('index', {
-        title:'Weather App',
-        name: 'Kevin Mckeon'
+
+    if(!req.query.address){
+        return res.send({
+            error : 'Please provide a address'
+        })
+    }
+
+    geocode(req.query.address, (error, {latitude, longitude, location}) => {
+
+        if(error){
+            return res.send({error})
+        }
+        
+        weather(latitude, longitude, (error, {summary, temperature, precipProbability}) => {
+
+            if(error){
+                return res.send({error})
+            }
+
+            res.render('index', {
+                title:'Index Page',
+                name: 'Kevin Mckeon',
+                data : {
+                    latitude,
+                    longitude,
+                    location,
+                    summary,
+                    temperature,
+                    precipProbability
+                }
+            })
+        })
     })
 })
 
