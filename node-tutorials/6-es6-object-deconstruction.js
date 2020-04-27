@@ -40,10 +40,16 @@ console.log('\n');
 
 
 // You can destructure the argument directly
-const transaction = (type, {label:theLabel, stock:stockAmount, review}) => {
+// the = {} is the default value if the value that is attempting to be destructured is undefined
+const transaction = (type, {label:theLabel, stock:stockAmount, review = "no reviews defined", rating} = {} ) => {
     console.log(theLabel);
     console.log(stockAmount);
     console.log(review);
+    console.log(rating);
 }
 
 transaction('order' , product1)
+
+console.log('\n');
+
+transaction('order')

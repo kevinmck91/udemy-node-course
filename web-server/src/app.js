@@ -18,8 +18,6 @@ app.set('view engine', 'hbs')
 app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
 
-
-
 // Setup static directiory to serve
 app.use(express.static(publicDirectoryPath))
 app.use(express.static(viewsPath))
@@ -62,7 +60,6 @@ app.get('', (req, res) => {
     })
 })
 
-
 app.get('/about', (req, res) => {
     res.render('about', {
         title:'About Page',
@@ -90,7 +87,6 @@ app.get('*', (req, res) => {
         title:'404 - Page Not Found',
     })
 })
-
 
 
 app.listen(3000, () => {
