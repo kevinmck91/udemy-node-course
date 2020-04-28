@@ -22,23 +22,29 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(publicDirectoryPath))
 app.use(express.static(viewsPath))
 
+// Enviornment variables
+const port = process.env.PORT || 3000
+
 
 
 app.get('', (req, res) => {
 
+
     if(!req.query.address){
-        return res.send({
-            error : 'Please provide a address'
+         return res.render('index', {
+            title:'Index Page',
+            name: 'Kevin Mckeon',
+            
         })
     }
 
-    geocode(req.query.address, (error, {latitude, longitude, location}) => {
+    geocode(req.query.address, (error, {latitude, longitude, location} = {}) => {
 
         if(error){
             return res.send({error})
         }
         
-        weather(latitude, longitude, (error, {summary, temperature, precipProbability}) => {
+        weather(latitude, longitude, (error, {summary, temperature, precipProbability} = {}) => {
 
             if(error){
                 return res.send({error})
@@ -55,6 +61,41 @@ app.get('', (req, res) => {
                     temperature,
                     precipProbability
                 }
+            })
+        })
+    })
+})
+
+app.get('/api', (req, res) => {
+
+
+    if(!req.query.address){
+        return res.send({
+            error : 'Please provide an address to the query String'
+        })
+    }
+
+    geocode(req.query.address, (error, {latitude, longitude, location} = {}) => {
+
+        if(error){
+            return res.send({error})
+        }
+        
+        weather(latitude, longitude, (error, {summary, temperature, precipProbability} = {}) => {
+
+            if(error){
+                return res.send({error})
+            }
+
+            return res.send({
+                
+                    latitude,
+                    longitude,
+                    location,
+                    summary,
+                    temperature,
+                    precipProbability
+                
             })
         })
     })
@@ -89,7 +130,7 @@ app.get('*', (req, res) => {
 })
 
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server is up on port 3000')
 })
 
