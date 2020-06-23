@@ -1,6 +1,7 @@
 // CRUD operations
 
-const  {MongoClient, objectID } = require('mongodb')
+const  MongoClient = require('mongodb')
+const  ObjectId = require('mongodb').ObjectID;
 
 const connectionURL = 'mongodb://127.0.0.1:27017' 
 const databaseName = 'task-manager'
@@ -15,13 +16,12 @@ MongoClient.connect(connectionURL, { useNewUrlParser:true}, (error, client) => {
 
     console.log("Connected sucessfully")
 
-    
-    // Creates a new database
+    // Creates a new database connection
     const db = client.db(databaseName)
 
-/*
 
-    // Allows you to insert a single document into a collection
+
+/************** Allows you to insert a single document into a collection **************
     db.collection('users').insertOne({
         name: 'kevin',
         age: 28
@@ -33,9 +33,9 @@ MongoClient.connect(connectionURL, { useNewUrlParser:true}, (error, client) => {
 
         console.log(result.ops)
     })
+*/
 
-
-    // Insert Multiple entries
+/************** Insert Multiple entries **************
     db.collection('tasks').insertMany([
         { 
             description: "Go shopping",
@@ -57,10 +57,10 @@ MongoClient.connect(connectionURL, { useNewUrlParser:true}, (error, client) => {
 
         console.log(result.ops)
     })
-
 */
 
-    // Find data on an individual Document (returns the first)
+
+/************** Find data on an individual Document (returns the first) **************
     db.collection('users').findOne({ name:'Jen', age : 28}, (error, user) => {
 
         if(error){
@@ -80,5 +80,49 @@ MongoClient.connect(connectionURL, { useNewUrlParser:true}, (error, client) => {
     db.collection('users').find({ age : 28}).count((error, count) => {
         console.log(count)
     })
+
+*/
+
+
+/************** Updating an existing docuemtn to update (using promises) **************
+    db.collection('users').updateOne({
+        _id: new ObjectId("5eaab47e3488fb12c015357f")
+    }, {
+        $set: {
+            name: 'testest'
+        },
+        $inc:{ 
+            age:20
+        }
+    }).then((result) => {
+        console.log('success', result)
+    }).catch((error) => { 
+        console.log('Issues', error)
+    })
+
+*/
+
+/************** Updating many existing documents (using promises) **************
+    db.collection('tasks').updateMany({
+        completed: false
+    },{
+        $set: {
+            completed : true
+        }
+    }).then((result) => {
+        console.log(result)
+    }).catch((error)=> {
+        console.log(error)
+    })
+*/
+
+    db.collection('users').deleteOne({
+        age:48
+    }).then((result) => {
+        console.log(result)
+    }).catch((error)=> {
+        console.log(error)
+    })
+
 
 })
